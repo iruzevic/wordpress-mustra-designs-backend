@@ -12,6 +12,8 @@
 namespace Mustra_Designs\Includes;
 
 use Mustra_Designs\Admin as Admin;
+use Mustra_Designs\Plugins as Plugins;
+use Mustra_Designs\Plugins\Acf as Acf;
 use Mustra_Designs\Front as Front;
 
 /**
@@ -76,13 +78,13 @@ class Main {
     if ( defined( 'MD_PLUGIN_NAME' ) ) {
       $this->plugin_name = MD_PLUGIN_NAME;
     } else {
-      $this->plugin_name = 'mustra_designs';
+      $this->plugin_name = 'mustra-designs';
     }
 
     $this->load_dependencies();
     $this->set_locale();
     $this->define_admin_hooks();
-    $this->define_front_hooks();
+    $this->define_plugins_hooks();
   }
 
   /**
@@ -118,25 +120,67 @@ class Main {
    * @since 1.0.0
    */
   private function define_admin_hooks() {
-    $admin = new Admin\Admin( $this->get_plugin_info() );
+    $admin      = new Admin\Admin( $this->get_plugin_info() );
+    $projects   = new Admin\Projects( $this->get_plugin_info() );
+    $login      = new Admin\Login( $this->get_plugin_info() );
+    $menu       = new Admin\Menu( $this->get_plugin_info() );
+    $media      = new Admin\Media( $this->get_plugin_info() );
 
-    $this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_scripts' );
+    // Admin.
+    $this->loader->add_action( 'login_enqueue_scripts', $admin, 'enqueue_styles' );
     $this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_styles', 50 );
+    $this->loader->add_action( 'admin_body_class', $admin, 'set_enviroment_body_class' );
+    $this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_scripts' );
+
+    // Projects.
+    $this->loader->add_action( 'init', $projects, 'register_post_type' );
+    $this->loader->add_action( 'init', $projects, 'register_taxonomy' );
+
+    // Login page.
+    $this->loader->add_filter( 'login_headerurl', $login, 'custom_login_url' );
+
+    // Menu.
+    $this->loader->add_action( 'after_setup_theme', $menu, 'register_menu_positions' );
+    $this->loader->add_action( 'admin_bar_menu', $menu, 'admin_bar_remove_nodes', 999 );
+    $this->loader->add_action( 'admin_bar_menu', $menu, 'admin_bar_add_nodes', 10 );
+
+    // Media.
+    $this->loader->add_action( 'upload_mimes', $media, 'enable_mime_types' );
+    $this->loader->add_action( 'wp_prepare_attachment_for_js', $media, 'enable_svg_library_preview', 10, 3 );
+    $this->loader->add_action( 'embed_oembed_html', $media, 'wrap_responsive_oembed_filter', 10, 4 );
+    $this->loader->add_action( 'after_setup_theme', $media, 'add_theme_support' );
+    $this->loader->add_action( 'after_setup_theme', $media, 'add_custom_image_sizes' );
 
   }
 
-  /**
-   * Register all of the hooks related to the front area functionality
-   * of the plugin.
+    /**
+   * Register hooks for AFC functionality
    *
    * @since 1.0.0
    */
-  private function define_front_hooks() {
-    $front = new Front\Front( $this->get_plugin_info() );
+  private function define_plugins_hooks() {
+    $section_creator_template = new Acf\Section_Creator_Template( $this->get_plugin_info() );
+    $section_creator          = new Acf\Section_Creator( $this->get_plugin_info() );
+    $acf_theme_options        = new Acf\Theme_Options( $this->get_plugin_info() );
+    $djc                      = new Plugins\Decoupled_Json_Content( $this->get_plugin_info() );
 
-    $this->loader->add_action( 'wp_enqueue_scripts', $front, 'enqueue_scripts' );
-    $this->loader->add_action( 'wp_enqueue_scripts', $front, 'enqueue_styles' );
+    // Section Creator Template Page.
+    $this->loader->add_action( 'plugins_loaded', $section_creator_template, 'get_instance' );
 
+    // Section Creator.
+    $this->loader->add_action( 'acf/init', $section_creator, 'register_section_creator' );
+
+    // Plugin ACF - Theme Options.
+    $this->loader->add_action( 'acf/init', $acf_theme_options, 'create_theme_options_page' );
+    $this->loader->add_action( 'acf/init', $acf_theme_options, 'register_theme_options' );
+    $this->loader->add_action( 'acf/init', $acf_theme_options, 'set_theme_options' );
+    $this->loader->add_action( 'acf/save_post', $acf_theme_options, 'remove_transient' );
+
+    // Additional post types in decoupled JSON.
+    $this->loader->add_action( 'djc_set_items_allowed_post_types', $djc, 'append_post_types' );
+    $this->loader->add_action( 'djc_set_items_custom_fields', $djc, 'set_section_creator_fields' );
+    $this->loader->add_filter( 'djc_set_items_page_template', $djc, 'set_page_template' );
+    $this->loader->add_filter( 'djc_set_general_endpoint', $djc, 'append_to_endpoints_list' );
   }
 
   /**

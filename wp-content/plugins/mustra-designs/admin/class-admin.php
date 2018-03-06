@@ -81,4 +81,27 @@ class Admin {
     wp_enqueue_script( $this->plugin_name . '-scripts' );
 
   }
+
+  /**
+   * Add admin bar class for different environment
+   *
+   * You can style admin bar of each environment differently for better
+   * differentiation, and smaller chance of error.
+   *
+   * @param  string $classes Get preset body classes.
+   * @return string $classes Body classes with env class.
+   *
+   * @since 1.0.0
+   */
+  public function set_enviroment_body_class( $classes ) {
+    $this->env = '';
+
+    if ( defined( 'ESH_ENV' ) ) {
+      $this->env = ESH_ENV;
+    }
+
+    $classes .= ' env--' . $this->env;
+
+    return $classes;
+  }
 }

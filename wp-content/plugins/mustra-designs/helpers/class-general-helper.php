@@ -44,6 +44,21 @@ class General_Helper {
   }
 
   /**
+   * Check if array has key and return its value if true.
+   * Useful if you want to be sure that key exists and return empty if it doesn't.
+   *
+   * @param string $key   Array key to check.
+   * @param array  $array Array in which the key should be checked.
+   * @return string       Value of the key if it exists, empty string if not.
+   *
+   * @since 1.0.0
+   */
+  public function get_array_value( $key, $array ) {
+    return ( gettype( $array ) === 'array' && array_key_exists( $key, $array ) ) ? $array[ $key ] : '';
+  }
+
+
+  /**
    * Return timestamp when file is changes.
    * This is used for cache busting assets.
    *
@@ -64,6 +79,28 @@ class General_Helper {
     }
 
     return filemtime( $file_location );
+  }
+
+  /**
+   * Set array to be used globaly for messages
+   *
+   * @param string $status Status of message.
+   * @param string $msg Message content.
+   * @param array  $data Data callback.
+   * @return array
+   *
+   * @since 1.0.0
+   */
+  public function set_msg_array( $status = null, $msg = null, $data = null ) {
+    if ( $status === 'error' ) {
+      http_response_code( 400 );
+    }
+
+    return array(
+        'status' => $status,
+        'msg'    => $msg,
+        'data'   => $data,
+    );
   }
 
 }

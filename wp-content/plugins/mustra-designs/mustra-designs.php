@@ -40,7 +40,7 @@ define( 'MD_PLUGIN_VERSION', '1.0.0' );
  * @since 1.0.0
  * @package mustra_designs
  */
-define( 'MD_PLUGIN_NAME', 'mustra_designs' );
+define( 'MD_PLUGIN_NAME', 'mustra-designs' );
 
 /**
  * Include the autoloader so we can dynamically include the rest of the classes.

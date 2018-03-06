@@ -55,7 +55,6 @@ class Menu {
   public function get_menu_positions() {
     return array(
         'headerMenu'  => esc_html__( 'Main Menu', 'mustra_designs' ),
-        'footerMenu'  => esc_html__( 'Footer Menu', 'mustra_designs' ),
     );
   }
 
