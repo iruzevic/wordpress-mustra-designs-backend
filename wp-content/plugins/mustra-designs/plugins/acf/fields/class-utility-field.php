@@ -139,7 +139,7 @@ class Utility_Field {
                     'required' => 0,
                     'conditional_logic' => 0,
                     'wrapper' => array(
-                        'width' => '',
+                        'width' => '50',
                         'class' => '',
                         'id' => '',
                     ),
@@ -151,6 +151,33 @@ class Utility_Field {
                     ),
                     'default_value' => array(
                         0 => 'default',
+                    ),
+                    'allow_null' => 0,
+                    'multiple' => 0,
+                    'ui' => 0,
+                    'ajax' => 0,
+                    'return_format' => 'value',
+                    'placeholder' => '',
+                ),
+                array(
+                    'key' => 'field_59ba321775751',
+                    'label' => 'Background Color',
+                    'name' => 'background_color',
+                    'type' => 'select',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '50',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'choices' => array(
+                        'none' => 'None',
+                        'dark' => 'Dark',
+                    ),
+                    'default_value' => array(
+                        0 => 'none',
                     ),
                     'allow_null' => 0,
                     'multiple' => 0,

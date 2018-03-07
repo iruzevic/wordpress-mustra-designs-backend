@@ -120,11 +120,12 @@ class Main {
    * @since 1.0.0
    */
   private function define_admin_hooks() {
-    $admin      = new Admin\Admin( $this->get_plugin_info() );
-    $projects   = new Admin\Projects( $this->get_plugin_info() );
-    $login      = new Admin\Login( $this->get_plugin_info() );
-    $menu       = new Admin\Menu( $this->get_plugin_info() );
-    $media      = new Admin\Media( $this->get_plugin_info() );
+    $admin          = new Admin\Admin( $this->get_plugin_info() );
+    $projects       = new Admin\Projects( $this->get_plugin_info() );
+    $login          = new Admin\Login( $this->get_plugin_info() );
+    $menu           = new Admin\Menu( $this->get_plugin_info() );
+    $media          = new Admin\Media( $this->get_plugin_info() );
+    $shared_section = new Admin\Shared_Section( $this->get_plugin_info() );
 
     // Admin.
     $this->loader->add_action( 'login_enqueue_scripts', $admin, 'enqueue_styles' );
@@ -151,6 +152,8 @@ class Main {
     $this->loader->add_action( 'after_setup_theme', $media, 'add_theme_support' );
     $this->loader->add_action( 'after_setup_theme', $media, 'add_custom_image_sizes' );
 
+    // Shared Sesction.
+    $this->loader->add_action( 'init', $shared_section, 'register_post_type' );
   }
 
     /**

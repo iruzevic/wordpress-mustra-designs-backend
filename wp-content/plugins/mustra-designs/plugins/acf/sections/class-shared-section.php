@@ -1,6 +1,6 @@
 <?php
 /**
- * Class that adds Timeline_Section for ACF builder.
+ * Class that adds Shared_Section for ACF builder.
  *
  * @since   2.0.0
  * @package mustra_designs
@@ -8,10 +8,12 @@
 
 namespace Mustra_Designs\Plugins\Acf\Sections;
 
+use Mustra_Designs\Admin as Admin;
+
 /**
- * Class Timeline_Section
+ * Class Shared_Section
  */
-class Timeline_Section {
+class Shared_Section {
 
   /**
    * Initialize class
@@ -29,13 +31,16 @@ class Timeline_Section {
    */
   public function init_section() {
     if ( function_exists( 'acf_add_local_field_group' ) ) {
+
+      $shared_section = new Admin\Shared_Section();
+
       acf_add_local_field_group(
         array(
-            'key' => 'group_59ba69934af87',
-            'title' => '_Section - Timeline',
+            'key' => 'group_59ba69934af88',
+            'title' => '_Section - Shared',
             'fields' => array(
                 array(
-                    'key' => 'field_59ba699355c11',
+                    'key' => 'field_59b1699355ca1',
                     'label' => 'Intro',
                     'name' => '',
                     'type' => 'tab',
@@ -51,7 +56,7 @@ class Timeline_Section {
                     'endpoint' => 0,
                 ),
                 array(
-                    'key' => 'field_59b9434686e12',
+                    'key' => 'field_5919434686e25',
                     'label' => '',
                     'name' => 'section_intro',
                     'type' => 'clone',
@@ -72,7 +77,7 @@ class Timeline_Section {
                     'prefix_name' => 1,
                 ),
                 array(
-                    'key' => 'field_59ba699355c13',
+                    'key' => 'field_59ba199355cd8',
                     'label' => 'Content',
                     'name' => '',
                     'type' => 'tab',
@@ -88,88 +93,30 @@ class Timeline_Section {
                     'endpoint' => 0,
                 ),
                 array(
-                    'key' => 'field_59ba699355c14',
-                    'label' => 'Items',
-                    'name' => 'items',
-                    'type' => 'repeater',
+                    'key' => 'field_5a9f18018c7d4',
+                    'label' => 'Shared Section',
+                    'name' => 'shared_section',
+                    'type' => 'post_object',
                     'instructions' => '',
                     'required' => 0,
                     'conditional_logic' => 0,
                     'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
+                      'width' => '',
+                      'class' => '',
+                      'id' => '',
                     ),
-                    'collapsed' => '',
-                    'min' => 0,
-                    'max' => 0,
-                    'layout' => 'block',
-                    'button_label' => 'Add New Box',
-                    'sub_fields' => array(
-                        array(
-                            'key' => 'field_59ba6a159eb15',
-                            'label' => 'Date',
-                            'name' => 'date',
-                            'type' => 'date_picker',
-                            'instructions' => '',
-                            'required' => 0,
-                            'conditional_logic' => 0,
-                            'wrapper' => array(
-                                'width' => '',
-                                'class' => '',
-                                'id' => '',
-                            ),
-                            'display_format' => 'd/m/Y',
-                            'return_format' => 'd/m/Y',
-                            'first_day' => 1,
-                        ),
-                        array(
-                            'key' => 'field_59ba6a099eb15',
-                            'label' => 'Content',
-                            'name' => 'content',
-                            'type' => 'wysiwyg',
-                            'instructions' => '',
-                            'required' => 0,
-                            'conditional_logic' => 0,
-                            'wrapper' => array(
-                                'width' => '',
-                                'class' => '',
-                                'id' => '',
-                            ),
-                            'default_value' => '',
-                            'tabs' => 'all',
-                            'toolbar' => 'very_simple',
-                            'media_upload' => 1,
-                            'delay' => 1,
-                        ),
-                        array(
-                            'key' => 'field_59c3b22927542',
-                            'label' => 'Image',
-                            'name' => 'image',
-                            'type' => 'image',
-                            'instructions' => '',
-                            'required' => 0,
-                            'conditional_logic' => 0,
-                            'wrapper' => array(
-                                'width' => '50',
-                                'class' => '',
-                                'id' => '',
-                            ),
-                            'return_format' => 'array',
-                            'preview_size' => 'thumbnail',
-                            'library' => 'all',
-                            'min_width' => '',
-                            'min_height' => '',
-                            'min_size' => '',
-                            'max_width' => '',
-                            'max_height' => '',
-                            'max_size' => '',
-                            'mime_types' => '',
-                        ),
+                    'post_type' => array(
+                      0 => $shared_section->post_type_slug,
                     ),
+                    'taxonomy' => array(
+                    ),
+                    'allow_null' => 0,
+                    'multiple' => 0,
+                    'return_format' => 'id',
+                    'ui' => 1,
                 ),
                 array(
-                    'key' => 'field_59ba699355116',
+                    'key' => 'field_59ba691355d16',
                     'label' => 'Utility',
                     'name' => '',
                     'type' => 'tab',
@@ -185,7 +132,7 @@ class Timeline_Section {
                     'endpoint' => 0,
                 ),
                 array(
-                    'key' => 'field_59ba699355d17',
+                    'key' => 'field_59ba639355d30',
                     'label' => '',
                     'name' => 'section_utilities',
                     'type' => 'clone',

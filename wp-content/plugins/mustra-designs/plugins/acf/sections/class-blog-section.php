@@ -1,6 +1,6 @@
 <?php
 /**
- * Class that adds Gallery_Section for ACF builder.
+ * Class that adds Blog_Section for ACF builder.
  *
  * @since   2.0.0
  * @package mustra_designs
@@ -9,9 +9,9 @@
 namespace Mustra_Designs\Plugins\Acf\Sections;
 
 /**
- * Class Gallery_Section
+ * Class Blog_Section
  */
-class Gallery_Section {
+class Blog_Section {
 
   /**
    * Initialize class
@@ -32,7 +32,7 @@ class Gallery_Section {
       acf_add_local_field_group(
         array(
             'key' => 'group_59ba69934af86',
-            'title' => '_Section - Gallery',
+            'title' => '_Section - Blog',
             'fields' => array(
                 array(
                     'key' => 'field_59ba699355ca1',
@@ -88,10 +88,51 @@ class Gallery_Section {
                     'endpoint' => 0,
                 ),
                 array(
-                    'key' => 'field_5a9527ff5a0ce',
-                    'label' => 'Gallery',
-                    'name' => 'gallery',
-                    'type' => 'gallery',
+                    'key' => 'field_5a9f0d1bd4d59',
+                    'label' => 'Items on one page',
+                    'name' => 'items_on_one_page',
+                    'type' => 'text',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                      'width' => '',
+                      'class' => '',
+                      'id' => '',
+                    ),
+                    'default_value' => '',
+                    'placeholder' => '',
+                    'prepend' => '',
+                    'append' => '',
+                    'maxlength' => '',
+                ),
+                array(
+                    'key' => 'field_5a9f0d2ed4d5a',
+                    'label' => 'Category',
+                    'name' => 'category',
+                    'type' => 'taxonomy',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                      'width' => '',
+                      'class' => '',
+                      'id' => '',
+                    ),
+                    'taxonomy' => 'category',
+                    'field_type' => 'checkbox',
+                    'allow_null' => 0,
+                    'add_term' => 0,
+                    'save_terms' => 0,
+                    'load_terms' => 0,
+                    'return_format' => 'object',
+                    'multiple' => 0,
+                ),
+                array(
+                    'key' => 'field_59c3325b91c58',
+                    'label' => esc_html__( 'After Content', 'mustra_designs' ),
+                    'name' => '',
+                    'type' => 'tab',
                     'instructions' => '',
                     'required' => 0,
                     'conditional_logic' => 0,
@@ -100,17 +141,29 @@ class Gallery_Section {
                         'class' => '',
                         'id' => '',
                     ),
-                    'min' => '',
-                    'max' => '',
-                    'insert' => 'append',
-                    'library' => 'all',
-                    'min_width' => '',
-                    'min_height' => '',
-                    'min_size' => '',
-                    'max_width' => '',
-                    'max_height' => '',
-                    'max_size' => '',
-                    'mime_types' => '',
+                    'placement' => 'top',
+                    'endpoint' => 0,
+                ),
+                array(
+                    'key' => 'field_59b3435686e36',
+                    'label' => '',
+                    'name' => 'links_list',
+                    'type' => 'clone',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'clone' => array(
+                        0 => 'group_59ba40e028c5f',
+                    ),
+                    'display' => 'group',
+                    'layout' => 'block',
+                    'prefix_label' => 0,
+                    'prefix_name' => 1,
                 ),
                 array(
                     'key' => 'field_59ba699355d16',

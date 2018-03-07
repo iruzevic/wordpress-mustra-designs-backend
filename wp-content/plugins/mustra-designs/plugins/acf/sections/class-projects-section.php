@@ -1,6 +1,6 @@
 <?php
 /**
- * Class that adds Info_Boxes_Section for ACF builder.
+ * Class that adds Projects_Section for ACF builder.
  *
  * @since   2.0.0
  * @package mustra_designs
@@ -8,10 +8,12 @@
 
 namespace Mustra_Designs\Plugins\Acf\Sections;
 
+use Mustra_Designs\Admin as Admin;
+
 /**
- * Class Info_Boxes_Section
+ * Class Projects_Section
  */
-class Info_Boxes_Section {
+class Projects_Section {
 
   /**
    * Initialize class
@@ -29,13 +31,16 @@ class Info_Boxes_Section {
    */
   public function init_section() {
     if ( function_exists( 'acf_add_local_field_group' ) ) {
+
+      $projects = new Admin\Projects();
+
       acf_add_local_field_group(
         array(
-            'key' => 'group_59ba69934af85',
-            'title' => '_Section - Info Boxes',
+            'key' => 'group_59ba69934af96',
+            'title' => '_Section - Projects',
             'fields' => array(
                 array(
-                    'key' => 'field_59ba699355caa',
+                    'key' => 'field_59ba699355c21',
                     'label' => 'Intro',
                     'name' => '',
                     'type' => 'tab',
@@ -51,7 +56,7 @@ class Info_Boxes_Section {
                     'endpoint' => 0,
                 ),
                 array(
-                    'key' => 'field_59b9434686e24',
+                    'key' => 'field_59b9434686e45',
                     'label' => '',
                     'name' => 'section_intro',
                     'type' => 'clone',
@@ -72,7 +77,7 @@ class Info_Boxes_Section {
                     'prefix_name' => 1,
                 ),
                 array(
-                    'key' => 'field_59ba699355cd7',
+                    'key' => 'field_59ba699355c18',
                     'label' => 'Content',
                     'name' => '',
                     'type' => 'tab',
@@ -88,9 +93,9 @@ class Info_Boxes_Section {
                     'endpoint' => 0,
                 ),
                 array(
-                    'key' => 'field_59ba699355d01',
-                    'label' => 'Items In one row',
-                    'name' => 'items_in_one_row',
+                    'key' => 'field_5a9f0f4bedd70',
+                    'label' => 'Type',
+                    'name' => 'type',
                     'type' => 'select',
                     'instructions' => '',
                     'required' => 0,
@@ -101,13 +106,11 @@ class Info_Boxes_Section {
                         'id' => '',
                     ),
                     'choices' => array(
-                        1 => '1',
-                        2 => '2',
-                        3 => '3',
-                        4 => '4',
+                        'featured' => 'Featured',
+                        'list' => 'List',
                     ),
                     'default_value' => array(
-                        0 => 4,
+                        0 => 'list',
                     ),
                     'allow_null' => 0,
                     'multiple' => 0,
@@ -117,111 +120,99 @@ class Info_Boxes_Section {
                     'placeholder' => '',
                 ),
                 array(
-                    'key' => 'field_59ba699355ced',
-                    'label' => 'Info Boxes',
-                    'name' => 'info_boxes',
-                    'type' => 'repeater',
+                    'key' => 'field_5a9f0f79edd71',
+                    'label' => 'Featured Item',
+                    'name' => 'featured_item',
+                    'type' => 'select',
                     'instructions' => '',
                     'required' => 0,
-                    'conditional_logic' => 0,
+                    'conditional_logic' => array(
+                        array(
+                            array(
+                                'field' => 'field_5a9f0f4bedd70',
+                                'operator' => '==',
+                                'value' => 'featured',
+                            ),
+                        ),
+                    ),
                     'wrapper' => array(
                         'width' => '',
                         'class' => '',
                         'id' => '',
                     ),
-                    'collapsed' => '',
-                    'min' => 0,
-                    'max' => 0,
-                    'layout' => 'block',
-                    'button_label' => 'Add New Box',
-                    'sub_fields' => array(
-                        array(
-                            'key' => 'field_59ba6a159eb12',
-                            'label' => 'Title',
-                            'name' => 'title',
-                            'type' => 'text',
-                            'instructions' => 'Input box title',
-                            'required' => 0,
-                            'conditional_logic' => 0,
-                            'wrapper' => array(
-                                'width' => '50',
-                                'class' => '',
-                                'id' => '',
-                            ),
-                            'default_value' => '',
-                            'placeholder' => '',
-                            'prepend' => '',
-                            'append' => '',
-                            'maxlength' => '',
-                        ),
-                        array(
-                            'key' => 'field_59ba69fa9eb10',
-                            'label' => 'Image',
-                            'name' => 'image',
-                            'type' => 'image',
-                            'instructions' => '',
-                            'required' => 0,
-                            'conditional_logic' => '',
-                            'wrapper' => array(
-                                'width' => '50',
-                                'class' => '',
-                                'id' => '',
-                            ),
-                            'return_format' => 'array',
-                            'preview_size' => 'thumbnail',
-                            'library' => 'all',
-                            'min_width' => '',
-                            'min_height' => '',
-                            'min_size' => '',
-                            'max_width' => '',
-                            'max_height' => '',
-                            'max_size' => '',
-                            'mime_types' => '',
-                        ),
-                        array(
-                            'key' => 'field_59ba6a099eb11',
-                            'label' => 'Content',
-                            'name' => 'content',
-                            'type' => 'wysiwyg',
-                            'instructions' => '',
-                            'required' => 0,
-                            'conditional_logic' => 0,
-                            'wrapper' => array(
-                                'width' => '50',
-                                'class' => '',
-                                'id' => '',
-                            ),
-                            'default_value' => '',
-                            'tabs' => 'all',
-                            'toolbar' => 'very_simple',
-                            'media_upload' => 1,
-                            'delay' => 1,
-                        ),
-                        array(
-                            'key' => 'field_59e9eecbcd311',
-                            'label' => 'Button',
-                            'name' => 'button',
-                            'type' => 'clone',
-                            'instructions' => '',
-                            'required' => 0,
-                            'conditional_logic' => 0,
-                            'wrapper' => array(
-                                'width' => '50',
-                                'class' => '',
-                                'id' => '',
-                            ),
-                            'clone' => array(
-                                0 => 'group_58ee240dc1934',
-                            ),
-                            'display' => 'group',
-                            'layout' => 'block',
-                            'prefix_label' => 0,
-                            'prefix_name' => 1,
-                        ),
+                    'choices' => array(
+                        'latest' => 'Latest',
+                        'random' => 'Random',
                     ),
+                    'default_value' => array(
+                        0 => 'latest',
+                    ),
+                    'allow_null' => 0,
+                    'multiple' => 0,
+                    'ui' => 0,
+                    'ajax' => 0,
+                    'return_format' => 'value',
+                    'placeholder' => '',
                 ),
                 array(
-                    'key' => 'field_59c3b25b99c58',
+                    'key' => 'field_5a9f0d1bd4d69',
+                    'label' => 'Items on one page',
+                    'name' => 'items_on_one_page',
+                    'type' => 'text',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => array(
+                        array(
+                            array(
+                                'field' => 'field_5a9f0f4bedd70',
+                                'operator' => '==',
+                                'value' => 'list',
+                            ),
+                        ),
+                    ),
+                    'wrapper' => array(
+                      'width' => '',
+                      'class' => '',
+                      'id' => '',
+                    ),
+                    'default_value' => '',
+                    'placeholder' => '',
+                    'prepend' => '',
+                    'append' => '',
+                    'maxlength' => '',
+                ),
+                array(
+                    'key' => 'field_5a9f0d2ed4d6a',
+                    'label' => 'Category',
+                    'name' => 'category',
+                    'type' => 'taxonomy',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => array(
+                        array(
+                            array(
+                                'field' => 'field_5a9f0f4bedd70',
+                                'operator' => '==',
+                                'value' => 'list',
+                            ),
+                        ),
+                    ),
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'taxonomy' => $projects->taxonomy_slug,
+                    'field_type' => 'checkbox',
+                    'allow_null' => 0,
+                    'add_term' => 0,
+                    'save_terms' => 0,
+                    'load_terms' => 0,
+                    'return_format' => 'object',
+                    'multiple' => 0,
+                ),
+                array(
+                    'key' => 'field_59c3b25b91c58',
                     'label' => esc_html__( 'After Content', 'mustra_designs' ),
                     'name' => '',
                     'type' => 'tab',
@@ -237,7 +228,7 @@ class Info_Boxes_Section {
                     'endpoint' => 0,
                 ),
                 array(
-                    'key' => 'field_59b9434686e36',
+                    'key' => 'field_59b9435686e36',
                     'label' => '',
                     'name' => 'links_list',
                     'type' => 'clone',
@@ -258,7 +249,7 @@ class Info_Boxes_Section {
                     'prefix_name' => 1,
                 ),
                 array(
-                    'key' => 'field_59ba699355d15',
+                    'key' => 'field_59ba699355d26',
                     'label' => 'Utility',
                     'name' => '',
                     'type' => 'tab',
@@ -274,7 +265,7 @@ class Info_Boxes_Section {
                     'endpoint' => 0,
                 ),
                 array(
-                    'key' => 'field_59ba699355d29',
+                    'key' => 'field_59ba699355d40',
                     'label' => '',
                     'name' => 'section_utilities',
                     'type' => 'clone',

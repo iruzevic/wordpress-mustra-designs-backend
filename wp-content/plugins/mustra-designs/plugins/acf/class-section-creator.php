@@ -68,6 +68,7 @@ class Section_Creator {
   public function init_section_creator() {
     if ( function_exists( 'acf_add_local_field_group' ) ) {
       $projects = new Admin\Projects();
+      $shared_section = new Admin\Shared_Section();
       $section_creator_template = new Section_Creator_Template();
 
       acf_add_local_field_group(
@@ -93,9 +94,10 @@ class Section_Creator {
                         '59c3b7b7962fd' => $this->section_image_text(),
                         '59c3b7b7962f1' => $this->section_hero(),
                         '59c3b7b7962f2' => $this->section_info_boxes(),
-                        '59c3b7b7962f3' => $this->section_gallery(),
+                        '59c3b7b7962f3' => $this->section_blog(),
                         '59c3b7b7962f4' => $this->section_timeline(),
-                        '59c3b7b7962f5' => $this->section_service_boxes(),
+                        '59c3b7b7962f5' => $this->section_projects(),
+                        '59c3b7b7962f6' => $this->section_shared(),
                     ),
                     'button_label' => 'Add new section',
                     'min' => '',
@@ -108,6 +110,13 @@ class Section_Creator {
                         'param' => 'post_type',
                         'operator' => '==',
                         'value' => $projects->post_type_slug,
+                    ),
+                ),
+                array(
+                    array(
+                        'param' => 'post_type',
+                        'operator' => '==',
+                        'value' => $shared_section->post_type_slug,
                     ),
                 ),
                 array(
@@ -147,9 +156,10 @@ class Section_Creator {
     $image_text    = new Sections\Image_Text_Section();
     $hero          = new Sections\Hero_Section();
     $info_boxes    = new Sections\Info_Boxes_Section();
-    $gallery       = new Sections\Gallery_Section();
+    $blog          = new Sections\Blog_Section();
     $timeline      = new Sections\Timeline_Section();
-    $service_boxes = new Sections\Service_Boxes_Section();
+    $projects      = new Sections\Projects_Section();
+    $shared        = new Sections\Shared_Section();
   }
 
   /**
@@ -339,17 +349,17 @@ class Section_Creator {
   }
 
   /**
-   * Section Gallery
+   * Section blog
    *
    * @since 2.0.0
    *
    * @return array
    */
-  public function section_gallery() {
+  public function section_blog() {
     return array(
         'key' => '59c3b7b7962f3',
-        'name' => 'gallery_section',
-        'label' => 'Gallery Section',
+        'name' => 'blog_section',
+        'label' => 'Blog Section',
         'display' => 'block',
         'sub_fields' => array(
             array(
@@ -421,17 +431,17 @@ class Section_Creator {
   }
 
   /**
-   * Section Service Boxes
+   * Section Projects
    *
    * @since 2.0.0
    *
    * @return array
    */
-  public function section_service_boxes() {
+  public function section_projects() {
     return array(
         'key' => '59c3b7b7962f5',
-        'name' => 'service_boxes_section',
-        'label' => 'Service Boxes Section',
+        'name' => 'projects_section',
+        'label' => 'Projects Section',
         'display' => 'block',
         'sub_fields' => array(
             array(
@@ -448,7 +458,48 @@ class Section_Creator {
                     'id' => '',
                 ),
                 'clone' => array(
-                    0 => 'group_59d60df4d8e45',
+                    0 => 'group_59ba69934af96',
+                ),
+                'display' => 'seamless',
+                'layout' => 'block',
+                'prefix_label' => 0,
+                'prefix_name' => 0,
+            ),
+        ),
+        'min' => '',
+        'max' => '',
+    );
+  }
+
+  /**
+   * Section Shared
+   *
+   * @since 2.0.0
+   *
+   * @return array
+   */
+  public function section_shared() {
+    return array(
+        'key' => '59c3b7b7962f6',
+        'name' => 'shared_section',
+        'label' => 'Shared Section',
+        'display' => 'block',
+        'sub_fields' => array(
+            array(
+                'key' => 'field_59c3b7b7962f6',
+                'label' => 'Section',
+                'name' => 'section',
+                'type' => 'clone',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'clone' => array(
+                    0 => 'group_59ba69934af88',
                 ),
                 'display' => 'seamless',
                 'layout' => 'block',
