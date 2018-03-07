@@ -61,7 +61,7 @@ class Shared_Section {
     $args = array(
         'label'               => esc_html__( 'Shared Section', 'mustra_designs' ),
         'public'              => true,
-        'menu_position'       => 47,
+        'menu_position'       => 48,
         'menu_icon'           => 'dashicons-images-alt',
         'supports'            => array( 'title' ),
         'has_archive'         => false,

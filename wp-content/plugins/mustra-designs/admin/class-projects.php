@@ -75,7 +75,7 @@ class Projects {
         'supports'            => array( 'title' ),
         'has_archive'         => false,
         'show_in_rest'        => false,
-        'publicly_queryable'  => true,
+        'publicly_queryable'  => false,
     );
 
     register_post_type( $this->post_type_slug, $args );

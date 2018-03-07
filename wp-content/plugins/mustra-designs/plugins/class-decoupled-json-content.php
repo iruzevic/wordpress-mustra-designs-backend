@@ -72,18 +72,45 @@ class Decoupled_Json_Content {
     if ( $post->post_type === 'page' ) {
       // Page can have multiple types.
       if ( get_page_template_slug( $post->ID ) === $this->acf_section_creator_template->template_name ) {
-        return array(
-            'sections' => get_field( 'sections', $post->ID )
-        );
+        return $this->return_section_creator_sections( $post->ID );
       }
     }
 
     if ( $post->post_type === $this->projects->post_type_slug ) {
       // Used for projects.
-      return array(
-          'sections' => get_field( 'sections', $post->ID )
-      );
+      return $this->return_section_creator_sections( $post->ID );
     }
+  }
+
+  /**
+   * Return section creator fields
+   *
+   * @param int $post_id POST ID.
+   * @return array
+   *
+   * @since  1.0.0
+   */
+  public function return_section_creator_sections( $post_id = null ) {
+    $sections = get_field( 'sections', $post_id );
+
+    foreach ( $sections as $section ) {
+      $section['acf_fc_id'] = rand(1, 30);
+    }
+
+    return array(
+      'sections' => $sections
+    );
+  }
+
+  /**
+   * Remove default cusotm fields
+   *
+   * @return boolian
+   *
+   * @since  1.0.0
+   */
+  public function set_custom_fields() {
+    return false;
   }
 
   /**
@@ -141,6 +168,17 @@ class Decoupled_Json_Content {
     );
 
     return $default;
+  }
+
+  /**
+   * Add prefix slash to menu item
+   *
+   * @return boolian
+   *
+   * @since 1.0.0
+   */
+  public function menu_prefix_slash() {
+    return false;
   }
 
 }

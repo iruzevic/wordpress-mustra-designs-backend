@@ -121,21 +121,17 @@ class Main {
    */
   private function define_admin_hooks() {
     $admin          = new Admin\Admin( $this->get_plugin_info() );
-    $projects       = new Admin\Projects( $this->get_plugin_info() );
     $login          = new Admin\Login( $this->get_plugin_info() );
     $menu           = new Admin\Menu( $this->get_plugin_info() );
     $media          = new Admin\Media( $this->get_plugin_info() );
     $shared_section = new Admin\Shared_Section( $this->get_plugin_info() );
+    $projects       = new Admin\Projects( $this->get_plugin_info() );
 
     // Admin.
     $this->loader->add_action( 'login_enqueue_scripts', $admin, 'enqueue_styles' );
     $this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_styles', 50 );
     $this->loader->add_action( 'admin_body_class', $admin, 'set_enviroment_body_class' );
     $this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_scripts' );
-
-    // Projects.
-    $this->loader->add_action( 'init', $projects, 'register_post_type' );
-    $this->loader->add_action( 'init', $projects, 'register_taxonomy' );
 
     // Login page.
     $this->loader->add_filter( 'login_headerurl', $login, 'custom_login_url' );
@@ -154,6 +150,10 @@ class Main {
 
     // Shared Sesction.
     $this->loader->add_action( 'init', $shared_section, 'register_post_type' );
+
+    // Projects.
+    $this->loader->add_action( 'init', $projects, 'register_post_type' );
+    $this->loader->add_action( 'init', $projects, 'register_taxonomy' );
   }
 
     /**
@@ -181,9 +181,11 @@ class Main {
 
     // Additional post types in decoupled JSON.
     $this->loader->add_action( 'djc_set_items_allowed_post_types', $djc, 'append_post_types' );
-    $this->loader->add_action( 'djc_set_items_custom_fields', $djc, 'set_section_creator_fields' );
+    $this->loader->add_action( 'djc_set_items_custom_fields', $djc, 'set_custom_fields' );
+    $this->loader->add_action( 'djc_set_items_append', $djc, 'set_section_creator_fields' );
     $this->loader->add_filter( 'djc_set_items_page_template', $djc, 'set_page_template' );
     $this->loader->add_filter( 'djc_set_general_endpoint', $djc, 'append_to_endpoints_list' );
+    $this->loader->add_filter( 'djc_remove_menu_prefix_slash', $djc, 'menu_prefix_slash' );
   }
 
   /**
