@@ -321,7 +321,22 @@ class Theme_Options {
         'cookies_notification_description'    => get_field( 'cookies_notification_description', 'options' ),
         'social'                              => get_field( 'social', 'options' ),
         'frontend_url'                        => get_field( 'frontend_url', 'options' ),
+        'home_page_url'                       => $this->getHomePageSlug(),
     );
+  }
+
+  /**
+   * Return homepage url set in settings > reading
+   *
+   * @return string
+   *
+   * @since 1.0.0
+   */
+  private function getHomePageSlug() {
+    $theme_option = get_option( 'page_on_front' );
+    $page = get_post( $theme_option );
+
+    return $page->post_name;
   }
 
   /**
