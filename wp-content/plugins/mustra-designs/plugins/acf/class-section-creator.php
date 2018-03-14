@@ -98,6 +98,7 @@ class Section_Creator {
                         '59c3b7b7962f4' => $this->section_timeline(),
                         '59c3b7b7962f5' => $this->section_projects(),
                         '59c3b7b7962f6' => $this->section_shared(),
+                        '59c3b7b7962f7' => $this->section_divider(),
                     ),
                     'button_label' => 'Add new section',
                     'min' => '',
@@ -160,6 +161,7 @@ class Section_Creator {
     $timeline      = new Sections\Timeline_Section();
     $projects      = new Sections\Projects_Section();
     $shared        = new Sections\Shared_Section();
+    $divider       = new Sections\Divider_Section();
   }
 
   /**
@@ -500,6 +502,47 @@ class Section_Creator {
                 ),
                 'clone' => array(
                     0 => 'group_59ba69934af88',
+                ),
+                'display' => 'seamless',
+                'layout' => 'block',
+                'prefix_label' => 0,
+                'prefix_name' => 0,
+            ),
+        ),
+        'min' => '',
+        'max' => '',
+    );
+  }
+
+  /**
+   * Section Divider
+   *
+   * @since 2.0.0
+   *
+   * @return array
+   */
+  public function section_divider() {
+    return array(
+        'key' => '59c3b7b7962f7',
+        'name' => 'divider_section',
+        'label' => 'Divider Section',
+        'display' => 'block',
+        'sub_fields' => array(
+            array(
+                'key' => 'field_59c3b7b7962f7',
+                'label' => 'Section',
+                'name' => 'section',
+                'type' => 'clone',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'clone' => array(
+                    0 => 'group_59ba69934af98',
                 ),
                 'display' => 'seamless',
                 'layout' => 'block',

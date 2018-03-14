@@ -158,9 +158,9 @@ class Projects_Section {
                     'key' => 'field_5a9f0d1bd4d69',
                     'label' => 'Items on one page',
                     'name' => 'items_on_one_page',
-                    'type' => 'text',
+                    'type' => 'number',
                     'instructions' => '',
-                    'required' => 0,
+                    'required' => 1,
                     'conditional_logic' => array(
                         array(
                             array(
@@ -171,15 +171,17 @@ class Projects_Section {
                         ),
                     ),
                     'wrapper' => array(
-                      'width' => '',
-                      'class' => '',
-                      'id' => '',
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
                     ),
-                    'default_value' => '',
+                    'default_value' => '12',
                     'placeholder' => '',
                     'prepend' => '',
                     'append' => '',
-                    'maxlength' => '',
+                    'min' => '1',
+                    'max' => '12',
+                    'step' => '1',
                 ),
                 array(
                     'key' => 'field_5a9f0d2ed4d6a',
